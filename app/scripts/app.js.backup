@@ -1,0 +1,128 @@
+'use strict';
+var whenConfig = ['$urlRouterProvider', function ($urlRouterProvider) {
+        $urlRouterProvider.otherwise('/');
+    }];
+
+var indexStateConfig = ['$stateProvider', function ($stateProvider) {
+        $stateProvider
+                .state('index', {
+                    url: '/',
+                    views: {
+                        '': {
+                            templateUrl: './views/layout.html',
+                            controller: 'MyAppCtrl'
+                        },
+                        'app-navbar@index': {
+                            templateUrl: './views/app-navbar.html'
+                        },
+                        'app-accordion@index': {
+                            templateUrl: './views/app-accordion.html',
+                            controller: 'AppController',
+                            resolve: {
+                                //good time to load the app names
+                                appPromiseObj: function (AppFactory) {
+                                    return AppFactory.getApps();
+                                }
+                            }
+                        },
+                        'app-right@index': {
+                            templateUrl: './views/app-right.html'
+                        },
+                        'app-summary@index': {
+                            templateUrl: './views/app-right.html'
+                        },
+                        'app-tabs@index': {
+                            templateUrl: './views/app-right.html'
+                        },
+                        'server-view@index': {
+                            templateUrl: './views/servers.html',
+                            controller: 'AppServerCtrl'
+                        },
+                        'network-view@index': {
+                            templateUrl: './views/servers.html',
+                            controller: 'AppServerCtrl'
+                        },
+                        'workflow-view@index': {
+                            templateUrl: './views/servers.html',
+                            controller: 'AppServerCtrl'
+                        }
+                    }
+                });
+    }];
+
+// Declare app level module which depends on views, and components
+var geminiApp = angular.module('myApp', [
+    'ui.router',
+//    'ui.bootstrap',
+    'ui.grid',
+    'myApp.version'
+]).config(whenConfig).config(indexStateConfig);
+
+
+geminiApp.controller('MyAppCtrl', function () {
+});
+
+geminiApp.controller('AppController', function ($scope, AppFactory) {
+    $scope.apps = AppFactory.apps;
+});
+
+geminiApp.factory('AppFactory', function ($http) {
+    var appFac = {
+        apps: []
+    };
+
+    appFac.getApps = function () {
+        return $http
+                .get('http://localhost:4567/applications')
+                .success(function (data) {
+                    console.log("success calling http");
+                    angular.copy(data, appFac.apps);
+                    return appFac.apps;
+                });
+    };
+
+    return appFac;
+});
+
+geminiApp.controller('AppServerController', function ($scope, AppServerFactory) {
+    $scope.servers = AppServerFactory.servers;
+
+});
+
+geminiApp.factory('AppServerFactory', function ($http) {
+    var appSrvFac = {
+        servers: []
+    };
+
+    appSrvFac.getServers = function () {
+        return $http
+                .get('http://0.0.0.0:4567/servers')
+                .success(function (data) {
+                    angular.copy(data, appSrvFac.servers);
+                    return appSrvFac.servers;
+                });
+    };
+
+    return appSrvFac;
+});
+
+geminiApp.controller('AppNetworkController', function ($scope, AppNetworkFactory) {
+    $scope.networks = AppNetworkFactory.networks;
+});
+
+geminiApp.factory('AppNetworkFactory', function ($http) {
+    var appNetFac = {
+        networks: []
+    };
+
+    appNetFac.getNetworks = function () {
+        return $http
+                .get('0.0.0.0:4567/networks')
+                .success(function (data) {
+                    angular.copy(data, appNetFac.networks);
+                    return appNetFac.networks;
+                });
+    };
+
+    return appNetFac;
+});

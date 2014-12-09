@@ -1,0 +1,44 @@
+{
+    "$schema": "http://apollo.edu/server",
+    "title": "server",
+    "description": "application being managed",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "The unique identifier for the server",
+            "type": "integer"
+        },
+        "applicationID": {
+            "description" : "ID of the application to which this server belongs to",
+            "type" : "integer"
+        },
+        "name": {
+            "description": "The DNS name of the server",
+            "type": "string"
+        },
+        "description": {
+            "description": "A short description of the server",
+            "type": "string"
+        },
+        "admin": {
+            "description": "The name of an administrator's account",
+            "type": "string"
+        },
+        "password": {
+            "description": "The password to the admin account",
+            "type": "string"
+        },
+        "ip-address": {
+            "description": "The IPv4 address of the server",
+            "type": "string"
+        },
+        "backup-size": {
+            "description": "This size (in GB) of the backup",
+            "type": "integer"
+        },
+        "location": {
+            "description": "Coordinates to the location of the server",
+            "$ref": "http://json-schema.org/geo"
+        }
+    }
+}

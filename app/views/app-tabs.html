@@ -1,0 +1,34 @@
+<!-- <div class="panel panel-default">
+  <div class="panel-body">
+    <ul class="nav nav-tabs nav-justified">
+      <li role="presentation" class="active">
+        <a ui-sref="servers">Servers</a>
+      </li>
+      <li role="presentation">
+        <a ui-sref="network">Network</a>
+      </li>
+      <li role="presentation">
+        <a ui-sref="workflow">Workflow</a>
+      </li>
+    </ul>
+    <div ui-view="myTabView"></div>
+  </div>
+</div>
+-->
+<div class="container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <tabset justified="true">
+                <tab heading="Servers" select="srvTabShown = !srvTabShown" deselect="srvTabShown = !srvTabShown">
+                    <div ui-view="servers"></div>
+                </tab>
+                <tab heading="Networks" select="netTabShown = !netTabShown" deselect="netTabShown = !netTabShown">
+                    <div ui-view="networks"></div>
+                </tab>
+                <tab heading="Workflow" select="flowTabShown = !flowTabShown" deselect="flowTabShown = !flowTabShown">
+                    <div ui-view="workflow"></div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>

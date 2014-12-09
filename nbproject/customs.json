@@ -1,0 +1,20 @@
+{
+    "elements": {
+        "accordion": {
+            "attributes": {
+                "close-others": {}
+            }
+        },
+        "accordion-group": {},
+        "accordion-heading": {}
+    },
+    "attributes": {
+        "ui-view": {
+            "context": "div"
+        },
+        "ui-grid": {
+            "context": "div"
+        },
+        "ui-sref": {}
+    }
+}

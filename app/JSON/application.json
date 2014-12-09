@@ -1,0 +1,33 @@
+{
+    "$schema": "http://apollo.edu/application",
+    "title": "application",
+    "description": "application being managed",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "The unique identifier for the application",
+            "type": "integer"
+        },
+        "name": {
+            "description": "The name of the application",
+            "type": "string"
+        },
+        "description": {
+            "description": "A short description of the application",
+            "type": "string"
+        },
+        "custom": {
+            "description": "Any user provided data, text or URL's that describe the application",
+            "type": "string"
+        },
+        "backupSize": {
+            "description": "This size (in GB) of the entire backup",
+            "type": "integer"
+        },
+        "location": {
+            "description": "Coordinates to the location of the application",
+            "$ref": "http://json-schema.org/geo"
+        }
+    },
+    "required": ["id", "appName"]
+}

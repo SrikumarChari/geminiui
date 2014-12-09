@@ -1,0 +1,30 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <b>Servers and Applications</b>
+    </div>
+    <div class="panel-body">
+        <!--<div ng-repeat="app in apps">-->
+        <accordion close-others="true">
+            <!--the first element in the accordion is 'all servers'-->
+            <accordion-group>
+                <accordion-heading>
+                    <span ng-click="opened(0)">
+                        All Servers<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': is - open, 'glyphicon-chevron-right': !is - open}"></i>
+                    </span>
+                </accordion-heading>
+                <p>List of all servers managed</p>
+            </accordion-group>
+            <accordion-group ng-repeat="app in apps" id="{{app.id}}" ng-int="is-open=false">
+                <accordion-heading>
+                    <span ng-click="opened($index+1)">
+                        {{app.name}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': is - open, 'glyphicon-chevron-right': !is - open}"></i>
+                    </span>
+                </accordion-heading>
+                <p>{{app.description}}</p>
+                <p>{{app.custom}}</p>
+            </accordion-group>
+        </accordion>
+        <!--</div>-->
+    </div>
+</div>
